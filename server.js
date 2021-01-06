@@ -18,7 +18,9 @@ app.set("view engine", "ejs");
 
 // ------------------- Middleware
 
-//-------------------- Routes
+//-------------------- Routes 
+
+// CRUD Operations - Create, read, update, delete
 
 // All Fruits - INDEX
 app.get("/fruits", function (req, res) {
@@ -30,6 +32,13 @@ app.get("/fruits", function (req, res) {
   res.render("indexFruit", context);
 });
 
+
+app.get('/fruits/new', function (req, res) {
+  console.log('New Route');
+
+  res.render('newFruit');
+});
+
 // One Fruit - SHOW
 app.get("/fruits/:index", function (req, res) {
   const arrayIndex = req.params.index;
@@ -39,6 +48,7 @@ app.get("/fruits/:index", function (req, res) {
   });
   // res.send(result);
 });
+
 
 // CREATE A ROUTE THAT RESPONDS TO REQUEST MADE TO '/localhost:4000/ejs'
 // Start with console log to confirm
