@@ -13,8 +13,17 @@
 
     <h4><%= fruit.name %></h4>
 
-    <p>The Pear is Green</p>
-    <p>It is ready to eat</p>
+    <p>The <%= fruit.name %> is <%= fruit.color %></p>
+    
+    <% if (fruit.readyToEat) { %>
+      <p>It is ready to eat</p>
+    <% } else {  %>
+      <p>It is not ready to eat</p>
+    <% } %>
+
+
+
+
   </body>
 </html>
 

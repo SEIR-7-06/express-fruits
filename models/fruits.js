@@ -9,7 +9,7 @@ const fruits = [
     id: 1,
     name: "Pear",
     color: "green",
-    readyToEat: false,
+    readyToEat: true,
   },
   {
     id: 2,
