@@ -1,0 +1,37 @@
+context = { fruitsArray:
+  [
+    {name: 'Apple', color: 'Red', readyToEat: true},
+    {name: 'Pear', color: 'Red', readyToEat: true},
+    {name: 'Banana', color: 'Red', readyToEat: true},
+  ]
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruits</title>
+  </head>
+  <body>
+    <h1>All Fruits</h1>
+
+    <%# JSON.stringify(fruitsArray) %>
+
+    --------
+    <% console.log('Hello') %>
+    --------- 
+    
+
+      <% if (fruitsArray.length === 0) { %>
+        <h4>No fruits available</h4>
+      <% } else { %>
+        <% for (let i = 0; i < fruitsArray.length; i++) { %>
+          <h4><%= fruitsArray[i].name %></h4>
+        <% } %>
+      <% } %>
+
+
+
+  </body>
+</html>

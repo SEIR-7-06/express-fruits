@@ -24,8 +24,10 @@ app.set("view engine", "ejs");
 app.get("/fruits", function (req, res) {
   // Callback function - always takes req/res args
   console.log("Fruits Index Route");
-
-  res.send(fruits);
+  const context = {
+    fruitsArray: fruits,
+  };
+  res.render("indexFruit", context);
 });
 
 // One Fruit - SHOW

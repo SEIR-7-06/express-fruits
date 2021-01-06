@@ -7,14 +7,20 @@ const fruits = [
   },
   {
     id: 1,
-    name: "pear",
+    name: "Pear",
     color: "green",
     readyToEat: false,
   },
   {
     id: 2,
-    name: "banana",
+    name: "Banana",
     color: "yellow",
+    readyToEat: true,
+  },
+  {
+    id: 2,
+    name: "Green Grape",
+    color: "Green",
     readyToEat: true,
   },
 ];
