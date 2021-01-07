@@ -7,6 +7,7 @@
 */
 
 const express = require("express");
+const bodyParser = require('body-parser');
 const ejs = require("ejs");
 const fruits = require("./models/fruits.js");
 
@@ -18,6 +19,15 @@ app.set("view engine", "ejs");
 
 // ------------------- Middleware
 
+app.use(function (req, res, next) {
+  console.log('Middleware was called');
+
+  next(); // Allow the reques to continue
+});
+
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));
+
 //-------------------- Routes 
 
 // CRUD Operations - Create, read, update, delete
@@ -26,6 +36,7 @@ app.set("view engine", "ejs");
 app.get("/fruits", function (req, res) {
   // Callback function - always takes req/res args
   console.log("Fruits Index Route");
+  console.log(fruits);
   const context = {
     fruitsArray: fruits,
   };
@@ -47,6 +58,25 @@ app.get("/fruits/:index", function (req, res) {
     fruit: result,
   });
   // res.send(result);
+});
+
+app.post('/fruits', function (req, res) {
+  console.log('Create Route');
+  console.log(req.body);
+
+  const newFruitObj = {};
+  newFruitObj.name = req.body.name;
+  newFruitObj.color = req.body.color;
+
+  if (req.body.readyToEat) {
+    newFruitObj.readyToEat = true;
+  } else {
+    newFruitObj.readyToEat = false;
+  }
+
+  fruits.push(req.body);
+
+  res.redirect('/fruits');
 });
 
 
