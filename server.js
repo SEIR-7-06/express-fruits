@@ -62,6 +62,16 @@ app.get("/fruits/:index", function (req, res) {
   // res.send(result);
 });
 
+app.get('/fruits/:index/edit', function (req, res) {
+  const arrayIndex = req.params.index;
+  const result = fruits[arrayIndex];
+  console.log(result);
+
+  res.render('editFruit', {
+    fruit: result,
+  });
+});
+
 app.post('/fruits', function (req, res) {
   console.log('Create Route');
   console.log(req.body);
@@ -76,13 +86,19 @@ app.post('/fruits', function (req, res) {
     newFruitObj.readyToEat = false;
   }
 
-  fruits.push(req.body);
+  fruits.push(newFruitObj);
 
   res.redirect('/fruits');
 });
 
 app.delete('/fruits/:index', function (req, res) {
-  console.log('hit delete for /fruits/:index');
+  console.log(fruits);
+  
+  fruits.splice(req.params.index, 1);
+
+  console.log(fruits);
+
+  res.redirect('/fruits');
 });
 
 // CREATE A ROUTE THAT RESPONDS TO REQUEST MADE TO '/localhost:4000/ejs'

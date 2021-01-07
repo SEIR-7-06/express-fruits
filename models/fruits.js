@@ -3,7 +3,7 @@ const fruits = [
     id: 0,
     name: "apple",
     color: "red",
-    readyToEat: true,
+    readyToEat: false,
   },
   {
     id: 1,

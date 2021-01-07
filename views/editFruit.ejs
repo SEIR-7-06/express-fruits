@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Fruit</title>
+</head>
+<body>
+  <h1>Edit Fruit</h1>
+
+  <form action="/fruits" method="POST">
+  
+    <div>
+      <label for="fruit-name">Fruit Name</label>
+      <input type="text" id="fruit-name" name="name" value="<%= fruit.name %>">
+    </div>
+
+
+    <div>
+      <label for="fruit-color">Fruit Color</label>
+      <input type="text" id="fruit-color" name="color" value="<%= fruit.color %>">
+    </div>
+
+    <div>
+      <label for="fruit-ready">Ready to Eat?</label>
+      <input type="checkbox" id="fruit-ready" name="readyToEat" <%= fruit.readyToEat && "checked" %>>
+    </div>
+    <br />
+
+    <button type="submit">Add Fruit</button>
+
+  </form>
+</body>
+</html>
