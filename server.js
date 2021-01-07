@@ -8,6 +8,7 @@
 
 const express = require("express");
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const ejs = require("ejs");
 const fruits = require("./models/fruits.js");
 
@@ -27,6 +28,7 @@ app.use(function (req, res, next) {
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 
 //-------------------- Routes 
 
@@ -79,6 +81,9 @@ app.post('/fruits', function (req, res) {
   res.redirect('/fruits');
 });
 
+app.delete('/fruits/:index', function (req, res) {
+  console.log('hit delete for /fruits/:index');
+});
 
 // CREATE A ROUTE THAT RESPONDS TO REQUEST MADE TO '/localhost:4000/ejs'
 // Start with console log to confirm
