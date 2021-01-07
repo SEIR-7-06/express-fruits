@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 // ------------------- Middleware
 
 app.use(function (req, res, next) {
-  console.log('Middleware was called');
+  // console.log('Middleware was called');
 
   next(); // Allow the reques to continue
 });
@@ -69,6 +69,7 @@ app.get('/fruits/:index/edit', function (req, res) {
 
   res.render('editFruit', {
     fruit: result,
+    index: arrayIndex,
   });
 });
 
@@ -100,6 +101,20 @@ app.delete('/fruits/:index', function (req, res) {
 
   res.redirect('/fruits');
 });
+
+app.put('/fruits/:index', function (req, res) {
+  // console.log(req.body);
+  const fruitIndex = req.params.index;
+
+  const updatedFruitObj = {
+    name: req.body.name,
+    color: req.body.color,
+    readyToEat: req.body.readyToEat === 'on'
+  }
+  fruits.splice(fruitIndex, 1, updatedFruitObj);
+
+  res.redirect(`/fruits/${fruitIndex}`);
+})
 
 // CREATE A ROUTE THAT RESPONDS TO REQUEST MADE TO '/localhost:4000/ejs'
 // Start with console log to confirm

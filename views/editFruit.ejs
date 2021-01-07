@@ -8,7 +8,7 @@
 <body>
   <h1>Edit Fruit</h1>
 
-  <form action="/fruits" method="POST">
+  <form action="/fruits/<%= index %>?_method=PUT" method="POST">
   
     <div>
       <label for="fruit-name">Fruit Name</label>
