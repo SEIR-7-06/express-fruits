@@ -10,7 +10,10 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const ejs = require("ejs");
-const fruits = require("./models/fruits.js");
+
+const veggiesController = require('./controllers/veggiesController.js');
+const dairyController = require('./controllers/dairyController.js');
+const fruitsController = require('./controllers/fruitsController.js');
 
 const app = express(); // this will return a
 
@@ -33,88 +36,12 @@ app.use(methodOverride('_method'));
 //-------------------- Routes 
 
 // CRUD Operations - Create, read, update, delete
-
-// All Fruits - INDEX
-app.get("/fruits", function (req, res) {
-  // Callback function - always takes req/res args
-  console.log("Fruits Index Route");
-  console.log(fruits);
-  const context = {
-    fruitsArray: fruits,
-  };
-  res.render("indexFruit", context);
-});
-
-
-app.get('/fruits/new', function (req, res) {
-  console.log('New Route');
-
-  res.render('newFruit');
-});
-
-// One Fruit - SHOW
-app.get("/fruits/:index", function (req, res) {
-  const arrayIndex = req.params.index;
-  const result = fruits[arrayIndex];
-  res.render("showFruit", {
-    fruit: result,
-  });
-  // res.send(result);
-});
-
-app.get('/fruits/:index/edit', function (req, res) {
-  const arrayIndex = req.params.index;
-  const result = fruits[arrayIndex];
-  console.log(result);
-
-  res.render('editFruit', {
-    fruit: result,
-    index: arrayIndex,
-  });
-});
-
-app.post('/fruits', function (req, res) {
-  console.log('Create Route');
-  console.log(req.body);
-
-  const newFruitObj = {};
-  newFruitObj.name = req.body.name;
-  newFruitObj.color = req.body.color;
-
-  if (req.body.readyToEat) {
-    newFruitObj.readyToEat = true;
-  } else {
-    newFruitObj.readyToEat = false;
-  }
-
-  fruits.push(newFruitObj);
-
-  res.redirect('/fruits');
-});
-
-app.delete('/fruits/:index', function (req, res) {
-  console.log(fruits);
-  
-  fruits.splice(req.params.index, 1);
-
-  console.log(fruits);
-
-  res.redirect('/fruits');
-});
-
-app.put('/fruits/:index', function (req, res) {
-  // console.log(req.body);
-  const fruitIndex = req.params.index;
-
-  const updatedFruitObj = {
-    name: req.body.name,
-    color: req.body.color,
-    readyToEat: req.body.readyToEat === 'on'
-  }
-  fruits.splice(fruitIndex, 1, updatedFruitObj);
-
-  res.redirect(`/fruits/${fruitIndex}`);
-})
+// app.get("/veggies", function (req, res) {
+//   res.send('GET to /veggies route hit');
+// });
+app.use('/veggies', veggiesController);
+app.use('/dairy', dairyController);
+app.use('/fruits', fruitsController);
 
 // CREATE A ROUTE THAT RESPONDS TO REQUEST MADE TO '/localhost:4000/ejs'
 // Start with console log to confirm
