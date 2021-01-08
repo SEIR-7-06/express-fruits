@@ -26,6 +26,7 @@ router.get("/:index", function (req, res) {
   const result = fruits[arrayIndex];
   res.render("showFruit", {
     fruit: result,
+    index: arrayIndex,
   });
   // res.send(result);
 });
