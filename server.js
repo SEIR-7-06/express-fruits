@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const ejs = require("ejs");
 
+require('./connection.js');
+
 const veggiesController = require('./controllers/veggiesController.js');
 const dairyController = require('./controllers/dairyController.js');
 const fruitsController = require('./controllers/fruitsController.js');

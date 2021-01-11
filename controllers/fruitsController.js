@@ -1,16 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const fruits = require("../models/fruits.js");
+const Fruit = require('../models/Fruit');
 
 // All Fruits - INDEX
 router.get("/", function (req, res) {
   // Callback function - always takes req/res args
-  console.log("Fruits Index Route");
-  console.log(fruits);
-  const context = {
-    fruitsArray: fruits,
-  };
-  res.render("indexFruit", context);
+
+  Fruit.find({}, function (err, allFruit) {
+    if (err) {
+      console.log(err);
+    }
+
+    const context = {
+      fruitsArray: allFruit,
+    };
+    res.render("indexFruit", context);
+  })
+
 });
 
 
@@ -21,13 +28,15 @@ router.get('/new', function (req, res) {
 });
 
 // One Fruit - SHOW
-router.get("/:index", function (req, res) {
-  const arrayIndex = req.params.index;
-  const result = fruits[arrayIndex];
-  res.render("showFruit", {
-    fruit: result,
-    index: arrayIndex,
+router.get("/:id", function (req, res) {
+  const fruitId = req.params.id;
+
+  Fruit.findById(fruitId, function (err, foundFruit) {
+    res.render("showFruit", {
+      fruit: foundFruit,
+    });
   });
+
   // res.send(result);
 });
 
@@ -56,9 +65,13 @@ router.post('/', function (req, res) {
     newFruitObj.readyToEat = false;
   }
 
-  fruits.push(newFruitObj);
+  Fruit.create(newFruitObj, function (err, addedFruit) {
+    if (err) {
+      console.log(err);
+    }
 
-  res.redirect('/fruits');
+    res.redirect('/fruits');
+  })
 });
 
 router.delete('/:index', function (req, res) {
