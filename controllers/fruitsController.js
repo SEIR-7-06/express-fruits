@@ -40,14 +40,13 @@ router.get("/:id", function (req, res) {
   // res.send(result);
 });
 
-router.get('/:index/edit', function (req, res) {
-  const arrayIndex = req.params.index;
-  const result = fruits[arrayIndex];
-  console.log(result);
+router.get('/:id/edit', function (req, res) {
+  const fruitId = req.params.id;
 
-  res.render('editFruit', {
-    fruit: result,
-    index: arrayIndex,
+  Fruit.findById(fruitId, function (err, foundFruit) {
+    res.render('editFruit', {
+      fruit: foundFruit,
+    });
   });
 });
 
@@ -87,18 +86,23 @@ router.delete('/:id', function (req, res) {
   });
 });
 
-router.put('/:index', function (req, res) {
+router.put('/:id', function (req, res) {
   // console.log(req.body);
-  const fruitIndex = req.params.index;
-
+  const fruitId = req.params.id;
+  
   const updatedFruitObj = {
     name: req.body.name,
     color: req.body.color,
     readyToEat: req.body.readyToEat === 'on'
   }
-  fruits.splice(fruitIndex, 1, updatedFruitObj);
 
-  res.redirect(`/fruits/${fruitIndex}`);
+  Fruit.findByIdAndUpdate(
+    fruitId,
+    updatedFruitObj,
+    {new: true},
+    function (err, updatedFruit) {
+      res.redirect(`/fruits/${fruitId}`);
+    })
 });
 
 module.exports = router;
