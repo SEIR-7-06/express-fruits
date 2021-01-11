@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const fruits = require("../models/fruits.js");
+const fruits = require('../models/fruits.js');
 const Fruit = require('../models/Fruit');
 
 // All Fruits - INDEX
-router.get("/", function (req, res) {
+router.get('/', function (req, res) {
   // Callback function - always takes req/res args
 
   Fruit.find({}, function (err, allFruit) {
@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
     const context = {
       fruitsArray: allFruit,
     };
-    res.render("indexFruit", context);
+    res.render('indexFruit', context);
   })
 
 });
@@ -28,11 +28,11 @@ router.get('/new', function (req, res) {
 });
 
 // One Fruit - SHOW
-router.get("/:id", function (req, res) {
+router.get('/:id', function (req, res) {
   const fruitId = req.params.id;
 
   Fruit.findById(fruitId, function (err, foundFruit) {
-    res.render("showFruit", {
+    res.render('showFruit', {
       fruit: foundFruit,
     });
   });
