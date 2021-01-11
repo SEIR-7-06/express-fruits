@@ -74,14 +74,17 @@ router.post('/', function (req, res) {
   })
 });
 
-router.delete('/:index', function (req, res) {
-  console.log(fruits);
+// /fruits/:id
+router.delete('/:id', function (req, res) {
   
-  fruits.splice(req.params.index, 1);
-
-  console.log(fruits);
-
-  res.redirect('/fruits');
+  const fruitId = req.params.id;
+  console.log('hit delete route', fruitId);
+  
+  Fruit.findByIdAndDelete(fruitId, function (err, deletedFruit) {
+    console.log('deletedFruit:', deletedFruit);
+    
+    res.redirect('/fruits');
+  });
 });
 
 router.put('/:index', function (req, res) {

@@ -17,7 +17,7 @@
       <% } else { %>
         <% for (let i = 0; i < fruitsArray.length; i++) { %>
           <a href="/fruits/<%= fruitsArray[i]._id %>"><h4><%= fruitsArray[i].name %></h4></a>
-          <form method="POST" action="/fruits/<%= i %>?_method=DELETE">
+          <form method="POST" action="/fruits/<%= fruitsArray[i]._id %>?_method=DELETE">
             <button type="submit">Delete</button>
           </form>
         <% } %>
